@@ -48,9 +48,7 @@ public class BaseGlassActivity extends Activity implements FingerListener, Scrol
         return false;
     }
 
-    /*
-     * Send generic motion events to the gesture detector
-     */
+   
     @Override
     public boolean onGenericMotionEvent(MotionEvent event) {
         if (mGestureDetector != null) {
@@ -61,7 +59,6 @@ public class BaseGlassActivity extends Activity implements FingerListener, Scrol
 
     private GestureDetector createGestureDetector(Context context) {
         GestureDetector gestureDetector = new GestureDetector(context);
-        //Create a base listener for generic gestures
         gestureDetector.setBaseListener(new GestureDetector.BaseListener() {
             @Override
             public boolean onGesture(Gesture gesture) {

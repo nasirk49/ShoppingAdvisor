@@ -14,7 +14,7 @@ import android.util.Log;
 public class ImageManager {
 
     private static final String TAG = ImageManager.class.getSimpleName();
-    private static final String PHOTO_DIR = "BarcodeEye";
+    private static final String PHOTO_DIR = "ShoppingAdvisor";
     private final File mDir;
 
     public ImageManager(Context context) {
@@ -22,7 +22,6 @@ public class ImageManager {
                 Environment.DIRECTORY_PICTURES);
         mDir = new File(publicDirectory.getAbsolutePath() + File.separator + PHOTO_DIR);
         if (mDir.mkdirs() || mDir.isDirectory()) {
-            // good!
         } else {
             Log.e(TAG, "Unable to create photo directory! " + mDir.toString());
         }

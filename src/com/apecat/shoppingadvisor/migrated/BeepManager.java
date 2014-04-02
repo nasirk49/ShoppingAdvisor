@@ -1,16 +1,3 @@
-/*
- * Copyright (C) 2010 ZXing authors
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.apecat.shoppingadvisor.migrated;
 
 import java.io.IOException;
@@ -26,11 +13,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.apecat.shoppingadvisor.R;
-import com.apecat.shoppingadvisor.scan.CaptureActivity;
 
-/**
- * Manages beeps and vibrations for {@link CaptureActivity}.
- */
 public final class BeepManager implements MediaPlayer.OnCompletionListener,
         MediaPlayer.OnErrorListener {
 
@@ -56,8 +39,6 @@ public final class BeepManager implements MediaPlayer.OnCompletionListener,
         playBeep = shouldBeep(prefs, activity);
         vibrate = false;
         if (playBeep && mediaPlayer == null) {
-            // The volume on STREAM_SYSTEM is not adjustable, and users found it too loud,
-            // so we now play on the music stream.
             activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
             mediaPlayer = buildMediaPlayer(activity);
         }
@@ -75,10 +56,8 @@ public final class BeepManager implements MediaPlayer.OnCompletionListener,
     }
 
     private static boolean shouldBeep(SharedPreferences prefs, Context activity) {
-        // TODO: Make it configurable
         boolean shouldPlayBeep = true;
         if (shouldPlayBeep) {
-            // See if sound settings overrides this
             AudioManager audioService = (AudioManager) activity
                     .getSystemService(Context.AUDIO_SERVICE);
             if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
@@ -111,7 +90,6 @@ public final class BeepManager implements MediaPlayer.OnCompletionListener,
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        // When the beep has finished playing, rewind to queue up another one.
         mp.seekTo(0);
     }
 
